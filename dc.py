@@ -13,7 +13,7 @@ L2 = []  # L2列表负责存储 中文意思
 
 # 给定参数j，加载第j组学习单词，每组15个单词
 def loadwordlist(j):
-    t = (j - 1) * 15 - 0
+    t = (j - 1) * 15 + 1
     for i in range(15):
         r = i + t  # r为取数列
         WordE = sheet.cell(r, 2).value  # 获取第r行，第3列的英文单词
@@ -40,8 +40,8 @@ def Wordshark(i):
             var.set(word)
             var2.set(" ")
             BDC.after(2000, Wordshark, i + 1)  # 再一次出现的单词停留2.0S
-
     # 当程序执行完成的时候，会进入益处异常，跳到该程序段
+
     except IndexError:
         var.set(" ")
         var2.set(" ")
@@ -59,12 +59,12 @@ def Fuxi(i):
     try:
         if N2[i] == N2[i + 1]:
             var.set(word)
-            var2.set(Chinese)  # 如果该单词第一次出现，在lb2上显示中文单词意思
+            var2.set(" ")
             BDC.after(2300, Fuxi, i + 1)  # 第一次出现的单词停留2.3s
         else:
             var.set(word)
-            var2.set(" ")
-            BDC.after(1500, Fuxi, i + 1)  # 再一次出现的单词停留1.5S
+            var2.set(Chinese)
+            BDC.after(1000, Fuxi, i + 1)  # 再一次出现的单词停留1S
             # 当程序执行完成的时候，会进入益处异常，跳到该程序段
     except IndexError:
         var.set(" ")
@@ -88,6 +88,8 @@ def run3():
 BDC = tkinter.Tk()
 BDC.title("极速闪回法背单词")
 BDC.geometry("2400x1200+100+100")  # 框架的整体尺寸
+frame = tkinter.Frame(height=1200, width=2400, bg="Wheat")
+frame.pack(expand="YES",)
 
 # 输出变量，用于将输出的数据传给输出框
 var = tkinter.StringVar()
@@ -108,13 +110,13 @@ b3 = tkinter.Button(BDC, text="复习检验", command=run3, width=20, height=2, 
 b3.place(relx=0.85, y=1000, relheight=0.1)  # 指定按钮框的位置
 
 # 输出框，分别负责输出 1英文 2中文 3全英文列表 4全中文列表
-lb1 = tkinter.Label(BDC, textvariable=var, fg="black", font=("Calibri", 200))
+lb1 = tkinter.Label(BDC, textvariable=var, fg="black", font=("Calibri", 200), bg="Wheat")
 lb1.place(x=300, y=200)  # 该位置负责输出英文
-lb2 = tkinter.Label(BDC, textvariable=var2, fg="black", font=("黑体", 50))
+lb2 = tkinter.Label(BDC, textvariable=var2, fg="black", font=("黑体", 50), bg="Wheat")
 lb2.place(x=600, y=600)  # 该位置负责输出中文
-lb3 = tkinter.Label(BDC, textvariable=var3, fg="black", font=("Calibri", 45))
+lb3 = tkinter.Label(BDC, textvariable=var3, fg="black", font=("Calibri", 45), bg="Wheat")
 lb3.place(x=300, y=0)    # 该位置负责结束的时候输出英文列表
-lb4 = tkinter.Label(BDC, textvariable=var4, fg="black", font=("Calibri", 45))
+lb4 = tkinter.Label(BDC, textvariable=var4, fg="black", font=("Calibri", 45), bg="Wheat")
 lb4.place(x=700, y=0)    # 该位置负责结束的时候输出英文列表
 
 """在loadword（）函数里边设置需要学习的第n组单词， n=0-219"""

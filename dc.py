@@ -21,7 +21,7 @@ def loadwordlist(j):
         L1.append(WordE)
         L2.append(WordC)
 
-#  学习的方法
+#  学习方法
 def Wordshark(i):
     # 单词出现的顺序数列 N1
     N1 = [1, 1, 2, 2, 1, 2, 1, 2, 3, 3, 1, 2, 3, 1, 2, 3, 2, 3, 4, 4, 2, 3, 4, 1, 2, 3, 4, 2, 3, 4, 5, 5, 1, 3, 4,
@@ -35,7 +35,7 @@ def Wordshark(i):
         if N1[i] == N1[i+1]:
             var.set(word)
             var2.set(chinese)  # 如果该单词第一次出现，在lb2上显示中文单词意思
-            BDC.after(3500, Wordshark, i + 1)  # 第一次出现的单词停留3.5s
+            BDC.after(4000, Wordshark, i + 1)  # 第一次出现的单词停留4s
         else:
             var.set(word)
             var2.set(" ")
@@ -49,9 +49,9 @@ def Wordshark(i):
         ks2 = '{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}\n{11}\n{12}\n{13}\n{14}'.format(L2[0],L2[1],L2[2],L2[3],L2[4],L2[5],L2[6],L2[7],L2[8],L2[9],L2[10],L2[11],L2[12],L2[13],L2[14],)
         var3.set(ks1)
         var4.set(ks2)
-        BDC.after(24, Wordshark, i + 1)
+        BDC.after(40000, Qinkong)
 
-# 复习的方法
+# 复习检验方法
 def Fuxi(i):
     N2 = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,1,1]
     word = L1[N2[i] - 1]  # 读取第i个单词
@@ -60,12 +60,12 @@ def Fuxi(i):
         if N2[i] == N2[i + 1]:
             var.set(word)
             var2.set(" ")
-            BDC.after(2300, Fuxi, i + 1)  # 第一次出现的单词停留2.3s
+            BDC.after(2000, Fuxi, i + 1)  # 第一次出现的单词停留2.3s
         else:
             var.set(word)
             var2.set(Chinese)
-            BDC.after(1000, Fuxi, i + 1)  # 再一次出现的单词停留1S
-            # 当程序执行完成的时候，会进入益处异常，跳到该程序段
+            BDC.after(1300, Fuxi, i + 1)  # 再一次出现的单词停留1S
+    # 当程序执行完成的时候，会进入益处异常，跳到该程序段
     except IndexError:
         var.set(" ")
         var2.set(" ")
@@ -73,7 +73,17 @@ def Fuxi(i):
         ks2 = '{0}\n{1}\n{2}\n{3}\n{4}\n{5}\n{6}\n{7}\n{8}\n{9}\n{10}\n{11}\n{12}\n{13}\n{14}'.format(L2[0], L2[1], L2[2], L2[3],L2[4], L2[5], L2[6], L2[7], L2[8], L2[9],  L2[10],L2[11],L2[12],L2[13],L2[14], )
         var3.set(ks1)
         var4.set(ks2)
-        BDC.after(24, Fuxi, i + 1)
+        BDC.after(40000, Qinkong)
+
+# 数据清空
+def Qinkong():
+    global L1, L2
+    L1 = []  # 清空所有单词
+    L2 = []  # 清空所有单词
+    var.set(" ")
+    var2.set(" ")
+    var3.set(" ")
+    var4.set(" ")
 
 # 调用的中转程序
 def run1():
@@ -99,15 +109,17 @@ var4 = tkinter.StringVar()
 
 # 输入框，输入要学习的单元
 inp1 = tkinter.Entry(BDC)
-inp1.place(relx=0.65, y=1050, height=50, width=100)  # 指定输入框的位置
+inp1.place(relx=0.8, y=1050, height=50, width=100)  # 指定输入框的位置
 
 # 按键，负责调用功能。包含的功能有 b1-输入数据后进行
-b1 = tkinter.Button(BDC, text="载入数据", command=run1, width=20, height=2, bd=4)
-b1.place(relx=0.05, y=1000, relheight=0.1)  # 指定按钮框的位置
-b2 = tkinter.Button(BDC,text="开始",command=run2, width=20, height=2, bd=4, )
-b2.place(relx=0.75, y=1000, relheight=0.1)  # 指定按钮框的位置
+b1 = tkinter.Button(BDC, text="载入数据\n共1-219组", command=run1, width=20, height=2, bd=4)
+b1.place(relx=0.85, y=1050, relheight=0.1)  # 指定按钮框的位置
+b2 = tkinter.Button(BDC, text="开始", command=run2, width=20, height=2, bd=4, )
+b2.place(relx=0.92, y=1050, relheight=0.1)  # 指定按钮框的位置
 b3 = tkinter.Button(BDC, text="复习检验", command=run3, width=20, height=2, bd=4, )
-b3.place(relx=0.85, y=1000, relheight=0.1)  # 指定按钮框的位置
+b3.place(relx=0.02, y=1050, relheight=0.1)  # 指定按钮框的位置
+b4 = tkinter.Button(BDC, text="清空", command=Qinkong, width=20, height=2, bd=4, )
+b4.place(relx=0.02, y=900, relheight=0.1)
 
 # 输出框，分别负责输出 1英文 2中文 3全英文列表 4全中文列表
 lb1 = tkinter.Label(BDC, textvariable=var, fg="black", font=("Calibri", 200), bg="Wheat")
@@ -118,8 +130,6 @@ lb3 = tkinter.Label(BDC, textvariable=var3, fg="black", font=("Calibri", 45), bg
 lb3.place(x=300, y=0)    # 该位置负责结束的时候输出英文列表
 lb4 = tkinter.Label(BDC, textvariable=var4, fg="black", font=("Calibri", 45), bg="Wheat")
 lb4.place(x=700, y=0)    # 该位置负责结束的时候输出英文列表
-
-"""在loadword（）函数里边设置需要学习的第n组单词， n=0-219"""
 
 BDC.mainloop()
 
